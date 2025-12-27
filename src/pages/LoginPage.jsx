@@ -1,19 +1,29 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+﻿import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import http from "../api/http.js";
 import Button from "../components/ui/Button.jsx";
 import Input from "../components/ui/Input.jsx";
 import Card from "../components/ui/Card.jsx";
 import Alert from "../components/ui/Alert.jsx";
+import useAuth from "../auth/useAuth.js";
 
 const DEFAULT_ERROR_MESSAGE = "Une erreur est survenue. Veuillez reessayer.";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [sessionMessage, setSessionMessage] = useState(location.state?.message || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (location.state?.message) {
+      setSessionMessage(location.state.message);
+    }
+  }, [location.state?.message]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,6 +33,7 @@ function LoginPage() {
 
     setIsSubmitting(true);
     setErrorMessage("");
+    setSessionMessage("");
 
     try {
       console.log("[LOGIN] submitting", { username: username.trim() });
@@ -38,24 +49,20 @@ function LoginPage() {
       }
 
       console.log("[LOGIN] success", { role });
-      localStorage.setItem("ebank_token", token);
-      localStorage.setItem("ebank_role", role);
-
-      if (role === "CLIENT") {
-        navigate("/dashboard");
-      } else if (role === "AGENT_GUICHET") {
-        navigate("/dashboard");
-      } else {
-        navigate("/dashboard");
-      }
+      login({ token, role });
+      navigate("/dashboard");
     } catch (error) {
       console.log("[LOGIN] error", error?.response?.data || error?.message);
       const apiMessage = error?.response?.data?.message;
-      setErrorMessage(apiMessage || DEFAULT_ERROR_MESSAGE);
+      if (error?.response?.status !== 401) {
+        setErrorMessage(apiMessage || DEFAULT_ERROR_MESSAGE);
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const displayMessage = sessionMessage || errorMessage;
 
   return (
     <section className="login-page">
@@ -66,7 +73,7 @@ function LoginPage() {
           <p>Accedez a votre espace securise en quelques secondes.</p>
         </div>
 
-        {errorMessage ? <Alert>{errorMessage}</Alert> : null}
+        {displayMessage ? <Alert>{displayMessage}</Alert> : null}
 
         <form className="login-form" onSubmit={handleSubmit}>
           <Input
