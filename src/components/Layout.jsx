@@ -2,27 +2,19 @@ import { Link } from "react-router-dom";
 
 function Layout({ children }) {
   return (
-    <div style={{ fontFamily: "sans-serif", minHeight: "100vh", background: "#f5f5f5" }}>
-      <nav
-        style={{
-          display: "flex",
-          gap: "1rem",
-          padding: "1rem 2rem",
-          background: "#222",
-          color: "#fff",
-        }}
-      >
-        <span style={{ fontWeight: "bold" }}>EBANK</span>
-        <Link to="/login" style={{ color: "#fff" }}>
+    <div className="app-shell">
+      <nav className="app-nav">
+        <span className="app-brand">EBANK</span>
+        <Link to="/login" className="app-link">
           Login
         </Link>
-        <Link to="/dashboard" style={{ color: "#fff" }}>
+        <Link to="/dashboard" className="app-link">
           Dashboard
         </Link>
-        {/* later we’ll show menus based on roles (CLIENT / AGENT_GUICHET) */}
+        {/* later we'll show menus based on roles (CLIENT / AGENT_GUICHET) */}
       </nav>
 
-      <main style={{ padding: "2rem" }}>{children}</main>
+      <main className="app-main">{children}</main>
     </div>
   );
 }

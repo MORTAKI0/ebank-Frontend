@@ -1,5 +1,10 @@
 # React + Vite
 
+## Local development
+
+- Create `.env.local` with `VITE_API_BASE_URL=http://localhost:8080` (no spaces).
+- Restart `npm run dev` after changing `.env.local` so Vite reloads env vars.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
