@@ -24,6 +24,9 @@ function Layout({ children }) {
             <Link to="/dashboard" className="app-link">
               Dashboard
             </Link>
+            <Link to="/change-password" className="app-link">
+              Changer mot de passe
+            </Link>
             {role === "CLIENT" ? (
               <span className="app-link" aria-disabled="true" title="Bientot">
                 Nouveau virement

@@ -2,6 +2,7 @@
 import Layout from "./components/Layout.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
@@ -17,6 +18,14 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={["CLIENT", "AGENT_GUICHET"]}>
                 <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/change-password"
+            element={
+              <ProtectedRoute allowedRoles={["CLIENT", "AGENT_GUICHET"]}>
+                <ChangePasswordPage />
               </ProtectedRoute>
             }
           />
