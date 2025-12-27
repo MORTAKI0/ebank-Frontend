@@ -37,9 +37,9 @@ function Layout({ children }) {
                 <Link to="/customers/new" className="app-link">
                   Ajouter client
                 </Link>
-                <span className="app-link" aria-disabled="true" title="Bientot">
+                <Link to="/accounts/new" className="app-link">
                   Nouveau compte
-                </span>
+                </Link>
               </>
             ) : null}
             <span className="status-pill status-pill--ok">Connecte ({roleLabel})</span>

@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
 import NewCustomerPage from "./pages/NewCustomerPage.jsx";
+import NewAccountPage from "./pages/NewAccountPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
@@ -35,6 +36,14 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={["AGENT_GUICHET"]}>
                 <NewCustomerPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/accounts/new"
+            element={
+              <ProtectedRoute allowedRoles={["AGENT_GUICHET"]}>
+                <NewAccountPage />
               </ProtectedRoute>
             }
           />
