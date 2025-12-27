@@ -1,4 +1,4 @@
-﻿import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../auth/useAuth.js";
 
 function Layout({ children }) {
@@ -34,9 +34,9 @@ function Layout({ children }) {
             ) : null}
             {role === "AGENT_GUICHET" ? (
               <>
-                <span className="app-link" aria-disabled="true" title="Bientot">
+                <Link to="/customers/new" className="app-link">
                   Ajouter client
-                </span>
+                </Link>
                 <span className="app-link" aria-disabled="true" title="Bientot">
                   Nouveau compte
                 </span>

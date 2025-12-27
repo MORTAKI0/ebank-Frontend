@@ -1,8 +1,9 @@
-﻿import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
 import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
+import NewCustomerPage from "./pages/NewCustomerPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
@@ -26,6 +27,14 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={["CLIENT", "AGENT_GUICHET"]}>
                 <ChangePasswordPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/customers/new"
+            element={
+              <ProtectedRoute allowedRoles={["AGENT_GUICHET"]}>
+                <NewCustomerPage />
               </ProtectedRoute>
             }
           />
