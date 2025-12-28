@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage.jsx";
 import ChangePasswordPage from "./pages/ChangePasswordPage.jsx";
 import NewCustomerPage from "./pages/NewCustomerPage.jsx";
 import NewAccountPage from "./pages/NewAccountPage.jsx";
+import NewTransferPage from "./pages/NewTransferPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
@@ -32,6 +33,14 @@ function App() {
             }
           />
           <Route
+            path="/transfers/new"
+            element={
+              <ProtectedRoute allowedRoles={["CLIENT"]}>
+                <NewTransferPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/customers/new"
             element={
               <ProtectedRoute allowedRoles={["AGENT_GUICHET"]}>
@@ -50,7 +59,6 @@ function App() {
           {/* Future routes:
             /clients/new
             /accounts/new
-            /transfers/new
         */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
