@@ -28,9 +28,9 @@ function Layout({ children }) {
               Changer mot de passe
             </Link>
             {role === "CLIENT" ? (
-              <span className="app-link" aria-disabled="true" title="Bientot">
+              <Link to="/transfers/new" className="app-link">
                 Nouveau virement
-              </span>
+              </Link>
             ) : null}
             {role === "AGENT_GUICHET" ? (
               <>
